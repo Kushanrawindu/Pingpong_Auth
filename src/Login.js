@@ -10,7 +10,17 @@ export default class Login extends Component {
 
     handleForm = (e) => {
         e.preventDefault();
-        this.props.history.push("/profile");
+        const data = {email:this.state.email, password:this.state.password};
+        
+        fetch("http://localhost:8000/api/auth/login",{
+            method:"post",
+            body:JSON.stringify(data),
+            headers:{"Content-Type" : "application/json"}
+        })
+        .then(res => res.json())
+        .then(res => console.log(res));
+
+        // this.props.history.push("/profile");
     }
 
     handleInput = (e) => {
