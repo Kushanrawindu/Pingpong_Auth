@@ -11,7 +11,7 @@ export default class Login extends Component {
     handleForm = (e) => {
         e.preventDefault();
         const data = {email:this.state.email, password:this.state.password};
-        
+
         fetch("http://localhost:8000/api/auth/login",{
             method:"post",
             body:JSON.stringify(data),
@@ -55,14 +55,14 @@ export default class Login extends Component {
                             <input type="submit" value="Log In" className="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8"></input>
                         </form>
                         <div className="text-center pt-12 pb-12">
-                            <p>Don't have an account? <a href="register.html" className="underline font-semibold">Register here.</a></p>
+                            <p>Don't have an account? <Link to="register.html" className="underline font-semibold">Register here.</Link></p>
                         </div>
                     </div>
                 </div>
 
                 {/* image section */}
                 <div className="w-1/2 shadow-2xl">
-                    <img className="object-cover w-full h-screen hidden md:block" src="https://source.unsplash.com/IXUM4cJynP0"></img>
+                    <img className="object-cover w-full h-screen hidden md:block" alt="login-img" src="https://source.unsplash.com/IXUM4cJynP0"></img>
                 </div>
             </div>
         )
