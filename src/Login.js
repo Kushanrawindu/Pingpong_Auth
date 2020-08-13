@@ -4,8 +4,8 @@ import {Link} from 'react-router-dom'
 export default class Login extends Component {
 
     constructor(props){
-        super(props)
-        this.state = {email:'', password:'', errors:{}}
+        super(props);
+        this.state = {email:'', password:'', errors:{}};
     }
 
     handleForm = (e) => {
@@ -14,6 +14,7 @@ export default class Login extends Component {
 
         fetch("http://localhost:8000/api/auth/login",{
             method:"post",
+            mode: 'no-cors',
             body:JSON.stringify(data),
             headers:{"Content-Type" : "application/json"}
         })
@@ -25,9 +26,9 @@ export default class Login extends Component {
 
     handleInput = (e) => {
         e.preventDefault();
-        const name = e.target.name
-        const value = e.target.value
-        this.setState({[name]:value})
+        const name = e.target.name;
+        const value = e.target.value;
+        this.setState({[name]:value});
     }
 
     render() {
