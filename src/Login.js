@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
+import axios from 'axios'
+import cookie from "js-cookie"
+import { connect } from 'react-redux'
 
 export default class Login extends Component {
 
@@ -11,18 +14,17 @@ export default class Login extends Component {
     handleForm = (e) => {
         e.preventDefault();
         const data = {email:this.state.email, password:this.state.password};
-
-        fetch("http://localhost:8000/api/auth/login",{
-            method:"post",
-            mode: 'no-cors',
-            body:JSON.stringify(data),
-            headers:{"Content-Type" : "application/json"}
+        
+        axios
+        .post("http://localhost:8000/api/auth/login",data)
+        .then(res => {
+            cookie.set("token", res.data.access_token);
+            this.props.setLogin(res.data.user);
+            this.props.history.push("/profile");
         })
-        .then(res => res.json())
-        .then(res => console.log(res));
-
+        .catch(e => this.setState({ errors: e.res.data }));
         // this.props.history.push("/profile");
-    }
+    };
 
     handleInput = (e) => {
         e.preventDefault();
@@ -32,6 +34,7 @@ export default class Login extends Component {
     }
 
     render() {
+        const error = this.state.errors
         return (
             <div className="w-full flex flex-wrap">
                 {/* Login section */}
@@ -43,6 +46,7 @@ export default class Login extends Component {
                     <div className="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
                         <p className="text-center text-3xl">Welcome</p>
                         <form className="flex flex-col pt-3 md:pt-8" onSubmit={this.handleForm}>
+                            {error.errors ? (<p className="text-red-500 text-sm">{error.errors}</p>):("")}
                             <div className="flex flex-col pt-4">
                                 <label for="email" className="text-lg">Email</label>
                                 <input type="email" id="email" placeholder="you@email.com" onChange={this.handleInput} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" ></input>
@@ -69,3 +73,12 @@ export default class Login extends Component {
         )
     }
 }
+
+// const mapDispatchToProps = dispatch => {
+//     return {
+//       setLogin: user => dispatch({ type: "SET_LOGIN", payload: user })
+//     };
+//   };
+// export default connect(
+//     null,
+//     mapDispatchToProps)(Login);
