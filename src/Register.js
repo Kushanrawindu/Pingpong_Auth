@@ -21,7 +21,7 @@ export default class Register extends Component {
             this.props.setLogin(res.data.user);
             this.props.history.push("/profile");
         })
-        .catch(e => this.setState({ errors: e.res.data }));
+        .catch(e => this.setState({ errors: e.response.data.errors }));
         // this.props.history.push("/profile");
     };
 
