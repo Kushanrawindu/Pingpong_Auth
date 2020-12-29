@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 export default class Profile extends Component {
     render() {
         return (
-            <div class="mx-auto bg-grey-900">
+            <div className="mx-auto bg-grey-900">
     
     <div className="flex flex-col min-h-screen">
     <nav id="header" className="bg-gray-800">
