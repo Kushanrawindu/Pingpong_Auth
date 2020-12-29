@@ -36,38 +36,26 @@ export default class Login extends Component {
     render() {
         const error = this.state.errors
         return (
-            <div className="w-full flex flex-wrap">
-                {/* Login section */}
-                <div className="w-full md:w-1/2 flex flex-col">
-                    <div className="flex justify-center md:justify-start pt-12 md:pl-12 md:-mb-24">
-                        <Link to="/" className="bg-black text-white font-bold text-xl p-4">MyDreamHome</Link>
-                    </div>
-
-                    <div className="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
-                        <p className="text-center text-3xl">Welcome</p>
-                        <form className="flex flex-col pt-3 md:pt-8" onSubmit={this.handleForm}>
-                            {error.errors ? (<p className="text-red-500 text-sm">{error.errors}</p>):("")}
-                            <div className="flex flex-col pt-4">
-                                <label for="email" className="text-lg">Email</label>
-                                <input type="email" id="email" placeholder="you@email.com" onChange={this.handleInput} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" ></input>
+            <div className="flex">
+                <div className="w-1/3"/>
+                <div className="w-1/3 p-4 mt-10 bg-white">
+                    <form className="border border-gray-500" onSubmit={this.handleForm}>
+                        <div className="p-4">
+                            <h1 className="text-lg border-b border-gray-500">Login</h1> 
+                            {error.errors ? ( <p className="text-sm text-red-500">{error.errors}</p>):("")}
+                            <div className="mt-4">
+                                <label>Email</label>
+                                <input type="email" name="email" placeholder="Email" onChange={this.handleInput} className="w-full p-2 mt-1 bg-gray-200 border border-gray-400 rounded"/>
                             </div>
-
-                            <div className="flex flex-col pt-4">
-                                <label for="password" className="text-lg">Password</label>
-                                <input type="password" id="password" placeholder="Password" onChange={this.handleInput} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" ></input>
+                            <div className="mt-4">
+                                <label>Password</label>
+                                <input type="password" name="password" placeholder="Password" onChange={this.handleInput} className="w-full p-2 mt-1 bg-gray-200 border border-gray-400 rounded"/>
                             </div>
-
-                            <input type="submit" value="Sign In" className="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8"></input>
-                        </form>
-                        <div className="text-center pt-12 pb-12">
-                            <p>Don't have an account? <Link to="/register" className="underline font-semibold">Sign Up here</Link></p>
+                            <div className="mt-4">
+                                <input type="submit" className="p-2 mt-1 text-white bg-purple-600 border-gray-400 rounded cursor-pointer"/>
+                            </div>
                         </div>
-                    </div>
-                </div>
-
-                {/* image section */}
-                <div className="w-1/2 shadow-2xl">
-                    <img className="object-cover w-full h-screen hidden md:block" alt="login-img" src="https://source.unsplash.com/IXUM4cJynP0"></img>
+                    </form>
                 </div>
             </div>
         )
